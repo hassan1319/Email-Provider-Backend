@@ -5,6 +5,8 @@ var bodyParser = require("body-parser");
 require("dotenv").config();
 // FOR EMAILS LONG POLLING
 const { longPollEmails } = require("./server/utils/long-polling");
+// FOR CORS 
+var cors = require('cors')
 
 const app = express();
 const port = 8000;
@@ -14,6 +16,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 // parse application/json
 app.use(bodyParser.json());
+
+// allowing cross origin requests
+app.use(cors({ origin: true }))
 
 const knex = require("knex")({
   client: "pg",
